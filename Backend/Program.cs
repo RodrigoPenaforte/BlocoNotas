@@ -2,6 +2,10 @@ using Backend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Backend.Domain.Models.Usuarios;
+using Backend.Domain.Interfaces;
+using Backend.Infrastructure.Data.Repositories;
+using Backend.Application.Interfaces;
+using Backend.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +19,11 @@ builder.Services.AddIdentity<Usuario, IdentityRole>()
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
+builder.Services.AddScoped<INotaService, NotaService>();
+builder.Services.AddScoped<INotaRepository, NotaRepository>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Application.DTOs.BlocoDeNotasDTOs
 {
-    public class NotasOutputDTOs
+    public class NotasOutputDTO
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }

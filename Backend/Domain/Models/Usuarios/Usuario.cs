@@ -1,7 +1,6 @@
 using Backend.Domain.Models.BlocoDeNotas;
 using Microsoft.AspNetCore.Identity;
 
-
 namespace Backend.Domain.Models.Usuarios
 {
     public class Usuario : IdentityUser
