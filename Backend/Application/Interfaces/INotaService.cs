@@ -10,8 +10,8 @@ namespace Backend.Application.Interfaces
     public interface INotaService
     {
         Task<IEnumerable<NotasOutputDTO>> BuscarNotasPorUsuario(string usuarioId);
-        Task<NotasOutputDTO> BuscarNotaPorId(int id, string usuarioId);
-        Task<NotasOutputDTO> CriarNota(NotasInputDTO notaInput, string usuarioId);
+        Task<NotasOutputDTO> BuscarNotaPorId(int id);
+        Task<NotasOutputDTO> CriarNota(NotasInputDTO notaInput);
         Task<NotasOutputDTO> AtualizarNota(int id, NotasInputDTO notaInput, string usuarioId);
         Task<bool> DeletarNota(int id, string usuarioId);
     }

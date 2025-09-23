@@ -6,6 +6,7 @@ using AutoMapper;
 using Backend.Application.DTOs.BlocoDeNotasDTOs;
 using Backend.Application.Interfaces;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Models.BlocoDeNotas;
 
 namespace Backend.Application.Services
 {
@@ -25,20 +26,36 @@ namespace Backend.Application.Services
             var buscarNotasPorUsuario = await _notaRepository.BuscarNotasPorUsuario(usuarioId);
             return _mapper.Map<IEnumerable<NotasOutputDTO>>(buscarNotasPorUsuario);
         }
-        public Task<NotasOutputDTO> BuscarNotaPorId(int id, string usuarioId)
+        public async Task<NotasOutputDTO> BuscarNotaPorId(int id)
         {
-            throw new NotImplementedException();
+            var buscarNotaPorId = await _notaRepository.BuscarNotasId(id) ?? throw new Exception("Não foi encontrado o id da nota");
+            return _mapper.Map<NotasOutputDTO>(buscarNotaPorId);
         }
 
 
-        public Task<NotasOutputDTO> CriarNota(NotasInputDTO notaInput, string usuarioId)
+        public async Task<NotasOutputDTO> CriarNota(NotasInputDTO notaInput)
         {
-            throw new NotImplementedException();
+            var nota = _mapper.Map<Notas>(notaInput);
+            var criarNotas = await _notaRepository.CriarNotas(nota) ?? throw new Exception("Não foi possível criar notas");
+            return _mapper.Map<NotasOutputDTO>(criarNotas);
         }
-        public Task<NotasOutputDTO> AtualizarNota(int id, NotasInputDTO notaInput, string usuarioId)
+
+
+        public async Task<NotasOutputDTO> AtualizarNota(int id, NotasInputDTO notaInput, string usuarioId)
         {
-            throw new NotImplementedException();
+            var notaExistente = await _notaRepository.BuscarNotasId(id) ?? throw new Exception("Não foi possível encontrar nota");
+            if (notaExistente.UsuarioId != usuarioId)
+                throw new Exception("Usuário não tem permissão para atualizar esta nota");
+
+            notaExistente.Titulo = notaInput.Titulo;
+            notaExistente.Conteudo = notaInput.Conteudo;
+            notaExistente.DataAtualizacao = DateTime.Now;
+
+            var notaAtualizada = await _notaRepository.AtualizarNotas(notaExistente);
+            return _mapper.Map<NotasOutputDTO>(notaAtualizada);
+
         }
+
 
         public Task<bool> DeletarNota(int id, string usuarioId)
         {
