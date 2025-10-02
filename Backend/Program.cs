@@ -20,6 +20,7 @@ builder.Services.AddIdentity<Usuario, IdentityRole>()
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddScoped<INotaService, NotaService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<INotaRepository, NotaRepository>();
 
 var app = builder.Build();

@@ -7,6 +7,7 @@ namespace Backend.Application.DTOs.UsuariosDTOs
 {
     public class UsuarioOutputDTO
     {
+        public string? Id { get; set; }
         public string? Email { get; set; }
         public string? Nome { get; set; }
         public DateTime DataCriacao { get; set; }

@@ -8,7 +8,7 @@ namespace Backend.Application.DTOs.BlocoDeNotasDTOs
     public class NotasOutputDTO
     {
         public int Id { get; set; }
-        public int UsuarioId { get; set; }
+        public string? UsuarioId { get; set; }
         public string? Titulo { get; set; }
         public string? Conteudo { get; set; }
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
