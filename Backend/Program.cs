@@ -23,11 +23,14 @@ builder.Services.AddScoped<INotaService, NotaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<INotaRepository, NotaRepository>();
 
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "ApiNotas"));
 }
 
 app.UseHttpsRedirection();
